@@ -29,11 +29,16 @@ $          End of string
 
 ### Starts with 3 digits
 > If the first 3 digits are digits then replace them with blank 
-```text = '014 Contra.nes'
+```
+import re
+text = '014 Contra.nes'
 regex_pattern = r'^\d{3}'
 text = re.sub(regex_pattern, '', text).strip()
 ```
-
+Output :
+```
+Contra.nes
+```
 ### Bracket with substring
 > The regular expression that starts and ends with bracket and contains a substring
 ```
@@ -43,4 +48,50 @@ text = '014 Contra (substring).nes'
 regex_pattern = r'\([^)]*substring[^)]*\)'
 text = re.sub(regex_pattern, '', text).strip()
 print(text)
+```
+Output :
+```
+014 Contra .nes
+```
+# Substring in string
+```
+import re
+
+text = '014 Contra (USA).nes'
+regex_pattern = r'\bUSA\b'
+text = re.sub(regex_pattern, '', text).strip()
+print(text)
+```
+Output : 
+```
+014 Contra ().nes
+```
+
+### Bracket with substring no space
+> The regular expression that starts and ends with bracket and contains a substring
+```
+import re
+
+text = '014 Contra (USA).nes'
+regex_pattern = r'\(\bUSA\b\)'
+text = re.sub(regex_pattern, '', text).strip()
+print(text)
+```
+Output :
+```
+014 Contra .nes
+```
+> As there is space the regular expression searches for the substring just after the bracket without any space
+So if the input is
+```
+import re
+
+text = '014 Contra (USA).nes'
+regex_pattern = r'\(\bUSA\b\)'
+text = re.sub(regex_pattern, '', text).strip()
+print(text)
+```
+Output :
+```
+014 Contra ( USA).nes
 ```
