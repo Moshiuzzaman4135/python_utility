@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flask CSV Data</title>
+</head>
+<body>
+    <h1>CSV Data</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>CGPA</th>
+            <th>Actions</th>
+        </tr>
+        {% for row in data %}
+            <tr>
+                {% for value in row %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+                <td>
+                    <a href="/edit/{{ row[1] }}">Edit</a>
+                    <a href="/delete/{{ row[1] }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Add New Student</h2>
+    <form action="/add" method="post">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" required><br>
+
+        <label for="cgpa">CGPA:</label>
+        <input type="text" id="cgpa" name="cgpa" required><br>
+
+        <input type="submit" value="Add Student">
+    </form>
+</body>
+</html>
